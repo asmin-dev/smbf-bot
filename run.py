@@ -5,7 +5,7 @@ from flask import Flask, request
 from os import environ
 import requests
 app = Flask(__name__)
-url = 'https://api.telegram.org/bot' + environ['TOKEN']
+url = 'https://api.telegram.org/bot' + environ["TOKEN"] + "/"
 
 
 
@@ -38,5 +38,6 @@ def index():
         return 'NOTHING FOUND HERE'
 
 if __name__ == '__main__':
+
     app.run(host='0.0.0.0',port=int(environ.get('PORT','5000')),debug=True)
 
