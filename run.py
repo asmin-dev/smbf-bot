@@ -19,7 +19,7 @@ def update(update):
         kirim_pesan(grup_id,teks)
     else:
         id = update['message']['chat']['id']
-        kirim_pesan(id,'halo, saya bot pertama')
+        kirim_pesan(id,'halo, smbf-bot')
 def kirim_pesan(id,teks):
     data = {
             'chat_id':id,
@@ -35,7 +35,7 @@ def index():
         update(data_update)
         return "oke"
     else:
-        return 'HALAMAN BOT PERTAMA SAYAHALAMAN INI BISA DI GANTI DENGAN KODE HTML'
+        return 'NOTHING FOUND HERE'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=int(environ.get('PORT','5000')),debug=True)
