@@ -19,7 +19,7 @@ def update(update):
         kirim_pesan(grup_id, teks)
     else:
         id = update['message']['chat']['id']
-        kirim_pesan(id, str(update['message']['chat']['text']))
+        kirim_pesan(id, str(update['message']['text']))
 def kirim_pesan(id, teks):
     data = {
             'chat_id':id,
