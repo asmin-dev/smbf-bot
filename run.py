@@ -17,6 +17,9 @@ def update(update):
         mem_baru  = update['message']['new_chat_member']['first_name']
         teks      = f'Hai {mem_baru} !\nSelamat datang di Grup {nama_grup}'
         kirim_pesan(grup_id, teks)
+    elif 'about' in str(update):
+        text = 'Hy, i\'m Smbf bot\ni was made for find random account on facebook\nBut I am still in the development stage\n I was made by t.me/asmin_19'
+        kirim_pesan(update['message']['chat']['id'], text)
     else:
         id = update['message']['chat']['id']
         kirim_pesan(id, str(update['message']['text']))
