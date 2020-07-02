@@ -11,13 +11,17 @@ url = 'https://api.telegram.org/bot' + environ["TOKEN"]
 
 
 def update(update):
+    try:
+        message = str(update['message']['text']).lower()
+    except:
+        message = ''
     if 'new_chat_member' in str(update):
         nama_grup = update['message']['chat']['title']
         grup_id   = update['message']['chat']['id']
         mem_baru  = update['message']['new_chat_member']['first_name']
         teks      = f'Hai {mem_baru} !\nSelamat datang di Grup {nama_grup}'
         kirim_pesan(grup_id, teks)
-    elif 'about' in str(update).lower():
+    elif message.startswith('/about'):
         text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by t.me/asmin_19'
         kirim_pesan(update['message']['chat']['id'], text)
     else:
