@@ -43,7 +43,8 @@ class Account:
     def loged(self):
         self.__login = False
     def login(self,ses):
-        if 'mbasic_logout_button' in str(ses.get("/me").content):
-            return True
-        else:
-            return str(ses.get("/me").content)
+        return str(ses.get('/me').content)
+        #if 'mbasic_logout_button' in str(ses.get("/me").content):
+         #   return True
+        #else:
+         #   return str(ses.get("/me").content)
