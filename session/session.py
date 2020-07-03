@@ -4,6 +4,7 @@
 # github: zettamus
 
 import requests
+import base64
 class Browser:
     def __init__(self):
         self.__req = requests.get
@@ -15,7 +16,7 @@ class Browser:
         pass
     @setkuki.setter
     def setkuki(self, kuki):
-        self.__cookies = {"cookie": kuki}
+        self.__cookies = {"cookie": base64.b64decode(kuki).decode()}
     @setkuki.getter
     def showkuki(self):
         return self.__cookies
