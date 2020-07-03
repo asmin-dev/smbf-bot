@@ -2,8 +2,13 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, request
+from session.session import Browser
 from os import environ
+import session
 import requests
+
+log = session.Account()
+ses = Browser()
 app = Flask(__name__)
 url = 'https://api.telegram.org/bot' + environ["TOKEN"]
 
@@ -22,18 +27,19 @@ def update(update):
         teks      = f'Hai {mem_baru} !\nSelamat datang di Grup {nama_grup}'
         kirim_pesan(grup_id, teks)
     elif message.startswith('/about'):
-        text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by t.me/asmin_19'
+        text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by t.me/asmindev'
         kirim_pesan(update['message']['chat']['id'], text)
+    elif message.startswith('/login '):
+        ses.setkuki = message.split(' ')[1]
+        text = log.login(ses)
+        if text:
+            kirim_pesan(update['message']['chat']['id'],'Login successfully')
     else:
         id = update['message']['chat']['id']
         kirim_pesan(id, str(update['message']['text']))
 def kirim_pesan(id, teks):
-    data = {
-            'chat_id':id,
-            'text':teks
-            }
+    data = {'chat_id':id,'text':teks}
     requests.get(url  + '/sendMessage', params=data)
-
 
 @app.route('/',methods=['POST', 'GET'])
 def index():
