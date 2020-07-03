@@ -38,7 +38,7 @@ def update(update):
             if text:
                kirim_pesan(update['message']['chat']['id'], 'Login successfully')
             else:
-                kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + str(ses.showkuki) + "\n" + str(data))
+                kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + str(data))
         else:
             kirim_pesan(update['message']['chat']['id'], 'Usage:\n\t/login <your cookie here>')
     else:
