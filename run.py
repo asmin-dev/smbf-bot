@@ -34,10 +34,7 @@ def update(update):
         if len(message.split(' ')) != 1:
             ses.setkuki = base64.b64encode(message.split(' ')[1].encode('utf-8'))
             text = log.login(ses)
-            if text == True:
-                kirim_pesan(update['message']['chat']['id'],'Login successfully')
-            else:
-                kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + text)
+            kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + text)
         else:
             kirim_pesan(update['message']['chat']['id'], 'Usage:\n\t/login <your cookie here>')
     else:
