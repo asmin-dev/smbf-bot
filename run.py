@@ -33,12 +33,12 @@ def update(update):
     elif message.startswith('/login'):
         if len(message.split(' ')) != 1:
             ses.setkuki = message.split(' ',1)[1].replace(' ','')
-            data = ses.get('/me').content
+            data = ses.get('/me').text
             text = log.login(data)
             if text:
                kirim_pesan(update['message']['chat']['id'], 'Login successfully')
             else:
-                kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + str(ses.showkuki))
+                kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + str(ses.showkuki), str(data))
         else:
             kirim_pesan(update['message']['chat']['id'], 'Usage:\n\t/login <your cookie here>')
     else:
