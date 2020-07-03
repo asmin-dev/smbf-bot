@@ -10,7 +10,7 @@ class Browser:
         self.__req = requests.get
         self.__post = requests.post
         self.__cookies = {"cookie": None}
-        self.__host = "https://free.facebook.com"
+        self.__host = "https://mbasic.facebook.com"
     @property
     def setkuki(self):
         pass
@@ -23,7 +23,7 @@ class Browser:
     def get(self,url):
         if self.__cookies["cookie"] == None:
             raise ValueError("Please set your cookie!")
-        return self.__req(self.__host + url, cookies = self.__cookies)
+        return self.__req(self.__host + url, cookies = self.__cookies).text
     def post(self, url, data):
         if self.__cookies["cookie"] == None:
             raise ValueError("Please set your cookie!")
