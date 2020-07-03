@@ -16,7 +16,7 @@ class Browser:
         pass
     @setkuki.setter
     def setkuki(self, kuki):
-        self.__cookies = {"cookie": base64.b64decode(kuki).decode()}
+        self.__cookies = {"cookie": kuki}
     @setkuki.getter
     def showkuki(self):
         return self.__cookies
