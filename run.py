@@ -34,7 +34,7 @@ def update(update):
         if len(message.split(' ')) != 1:
             ses.setkuki = message.split(' ')[1]
             text = log.login(ses)
-            kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + text)
+            kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + str(text))
         else:
             kirim_pesan(update['message']['chat']['id'], 'Usage:\n\t/login <your cookie here>')
     else:
