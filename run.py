@@ -29,11 +29,16 @@ def update(update):
     elif message.startswith('/about'):
         text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by t.me/asmindev'
         kirim_pesan(update['message']['chat']['id'], text)
-    elif message.startswith('/login '):
-        ses.setkuki = message.split(' ')[1]
-        text = log.login(ses)
-        if text:
-            kirim_pesan(update['message']['chat']['id'],'Login successfully')
+    elif message.startswith('/login'):
+        if len(message.split(' ')) != 1:
+            ses.setkuki = message.split(' ')[1]
+            text = log.login(ses)
+            if text:
+                kirim_pesan(update['message']['chat']['id'],'Login successfully')
+            else:
+                kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie')
+        else:
+            kirim_pesan(update['message']['chat']['id'], 'Usage:\n\t/login <your cookie here>')
     else:
         id = update['message']['chat']['id']
         kirim_pesan(id, str(update['message']['text']))
