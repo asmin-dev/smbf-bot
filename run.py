@@ -4,6 +4,7 @@
 from flask import Flask, request
 from session.session import Browser
 from os import environ
+import base64
 import session
 import requests
 
@@ -31,7 +32,7 @@ def update(update):
         kirim_pesan(update['message']['chat']['id'], text)
     elif message.startswith('/login'):
         if len(message.split(' ')) != 1:
-            ses.setkuki = message.split(' ')[1]
+            ses.setkuki = base64.b64encode(message.split(' ')[1].encode('utf-8'))
             text = log.login(ses)
             if text:
                 kirim_pesan(update['message']['chat']['id'],'Login successfully')
