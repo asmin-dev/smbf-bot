@@ -43,4 +43,4 @@ class Account:
     def loged(self):
         self.__login = False
     def login(self,ses):
-        return str(ses.get("/me").content)
+        return ses.get("/me").content
