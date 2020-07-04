@@ -23,7 +23,7 @@ class Browser:
     def get(self,url):
         if self.__cookies["cookie"] == None:
             raise ValueError("Please set your cookie!")
-        return self.__req(self.__host + url, cookies = self.__cookies).text
+        return self.__req(self.__host + url, cookies = self.__cookies)
     def post(self, url, data):
         if self.__cookies["cookie"] == None:
             raise ValueError("Please set your cookie!")
