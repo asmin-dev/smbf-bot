@@ -44,7 +44,7 @@ class Account:
         self.__login = False
     def login(self,ses):
         #return str(ses.get('/me').content)
-        if 'mbasic_logout_button' in str(ses):
-            return 'success'
+        if 'mbasic_logout_button' in str(ses.get('/me').content):
+            return True
         #else:
          #   return str(ses.get("/me").content)

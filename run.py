@@ -18,7 +18,7 @@ url = 'https://api.telegram.org/bot' + environ["TOKEN"]
 
 def update(update):
     try:
-        message = str(update['message']['text']).lower()
+        message = str(update['message']['text'])
     except:
         message = ''
     if 'new_chat_member' in str(update):
@@ -27,17 +27,18 @@ def update(update):
         mem_baru  = update['message']['new_chat_member']['first_name']
         teks      = f'Hai {mem_baru} !\nSelamat datang di Grup {nama_grup}'
         kirim_pesan(grup_id, teks)
-    elif message.startswith('/about'):
+    elif message.lower().startswith('/about'):
         text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by t.me/asmindev'
         kirim_pesan(update['message']['chat']['id'], text)
     elif message.startswith('/login'):
         if len(message.split(' ')) != 1:
             ses.setkuki = message.split(' ',1)[1].replace(' ','')
-            data = ses.get('/me')
-            #text = log.login(data)
-            #if text:
-             #  kirim_pesan(update['message']['chat']['id'], 'Login successfully')
-            kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + str(requests.get('https://mbasic.facebook.com').text))
+            data = ses.get('/me').text
+            text = log.login(data)
+            if text:
+               kirim_pesan(update['message']['chat']['id'], 'Login successfully')
+            else:
+                kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + str(data))
         else:
             kirim_pesan(update['message']['chat']['id'], 'Usage:\n\t/login <your cookie here>')
     else:
