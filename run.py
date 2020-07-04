@@ -35,6 +35,7 @@ def update(update):
             ses.setkuki = message.split(' ',1)[1].replace(' ','')
             data = ses.get('/me').text
             text = log.login(data)
+            print(text)
             if text:
                kirim_pesan(update['message']['chat']['id'], 'Login successfully')
             else:
