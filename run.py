@@ -37,7 +37,7 @@ def update(update):
             print(text)
             if text:
                kirim_pesan(update['message']['chat']['id'], 'Login successfully')
-               kirim_pesan(update['message']['chat']['id'], log.__str__(ses))
+               kirim_pesan(update['message']['chat']['id'], str(log.__str__(ses)))
             else:
                 kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + str(text))
         else:
