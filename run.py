@@ -34,12 +34,11 @@ def update(update):
         if len(message.split(' ')) != 1:
             ses.setkuki = message.split(' ',1)[1].replace(' ','')
             text = log.login(ses)
-            print(text)
             if text:
                kirim_pesan(update['message']['chat']['id'], 'Login successfully')
                kirim_pesan(update['message']['chat']['id'], str(log.__str__(ses)))
             else:
-                kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie\n' + str(text))
+                kirim_pesan(update['message']['chat']['id'], 'Login failed!\nCheck your cookie')
         else:
             kirim_pesan(update['message']['chat']['id'], 'Usage:\n\t/login <your cookie here>')
     else:
