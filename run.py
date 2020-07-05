@@ -60,12 +60,12 @@ def update(update):
                 if 'friends/center' in str(url):
                     continue
                 else:
-                    data = user.friendlist(url['href'])
-                    send(data['id'], data)
+                    id= user.friendlist(url['href'])
+                    send(data['id'], id)
     else:
         send(data['id'], data['text'])
 def send(id, teks):
-    data = {'chat_id':id,'text':teks}
+    data = {'chat_id':id,'text': str(id)}
     requests.get(url  + '/sendMessage', params=data)
 
 @app.route('/',methods=['POST', 'GET'])
