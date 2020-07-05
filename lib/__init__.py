@@ -17,12 +17,8 @@ class  Main:
         self.parser = ses
     # get users from your friends list and from other users
     def friendlist(self,link):
-        print()
-        print(link)
-        print(self.parser)
         try:
             raw = self.parser.get(link).content
-            print('ini raw ' + str(raw))
             users = re.findall('middle"><a class=".." href="(.*?)">(.*?)</a>',str(raw))
             for user in users:
                 if "profile" in str(user[0]):
@@ -30,7 +26,7 @@ class  Main:
                 elif "friend" in str(user):
                     continue
                 else:
-                    self.id.append(user[1] + "|" + user[0].replace("?",""))
+                    self.id.append(user[1] + "|" + user[0].replace("?","").replace('fref=fr_tab',''))
                 print(f'\r# {str(len(self.id))} retrieved',end="")
             if "Lihat Teman Lain" in str(raw):
                 self.friendlist(raw.find("a",string="Lihat Teman Lain")["href"])
