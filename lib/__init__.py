@@ -19,7 +19,7 @@ class  Main:
     # get users from your friends list and from other users
     def friendlist(self,link):
         try:
-            raw = self.parser.get(link).content
+            raw = bs(self.parser.get(link).content,'html.parser')
             users = re.findall('middle"><a class=".." href="(.*?)">(.*?)</a>',str(raw))
             for user in users:
                 if "profile" in str(user[0]):
@@ -47,7 +47,7 @@ class  Main:
                     self.id.append(user[1] + "|" + user[0].split('/')[1])
                 print(f'\r# {str(len(self.id))} retrieved',end="")
             if 'Lihat Selengkapnya' in str(raw):
-                self.likes(bs(raw, 'html.parser').find('a',string="Lihat Selengkapnya")["href"])
+                self.likes(raw.find('a',string="Lihat Selengkapnya")["href"])
             return self.id 
         except:
             return self.id 
@@ -63,7 +63,7 @@ class  Main:
                     self.id.append(user[1] + "|" + user[0].split("?")[0])
                 print(f"\r# {str(len(self.id))} retrieved ",end="")
             if "Lihat Hasil Selanjutnya" in str(search):
-                self.bysearch(bs(search, 'html.parser').find("a",string="Lihat Hasil Selanjutnya")["href"].split("book.com")[1])
+                self.bysearch(search.find("a",string="Lihat Hasil Selanjutnya")["href"].split("book.com")[1])
             return self.id 
         except:
             return self.id
@@ -79,7 +79,7 @@ class  Main:
                     self.id.append(user[1] + "|" + user[0])
                 print(f"\r# {str(len(self.id))} retrieved ",end="")
             if "Lihat Selengkapnya" in str(grab):
-                self.fromGrub(bs(grab, 'html.parser').find("a",string="Lihat Selengkapnya")["href"])
+                self.fromGrub(grab.find("a",string="Lihat Selengkapnya")["href"])
             return self.id 
         except:
             return self.id 
@@ -95,7 +95,7 @@ class  Main:
                 print(f"\r# {str(len(self.id))} retrieved ",end="")
             if len(self.id) != 0:
                 if "Lihat Hasil Selanjutnya" in str(grab):
-                    self.hashtag(bs(grab, 'html.parser').find("a",string="Lihat Hasil Selanjutnya")["href"].replace("https://free.facebook.com",""))
+                    self.hashtag(grab.find("a",string="Lihat Hasil Selanjutnya")["href"].replace("https://free.facebook.com",""))
             return self.id 
         except:
             return self.id 

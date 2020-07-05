@@ -27,12 +27,14 @@ def messages(data):
 def update(update):
     data = messages(update)
     if data['text'].startswith('/start'):
-        print(update)
+        '''
+        {'update_id': 252837133, 'message': {'message_id': 988, 'from': {'id': 932559405, 'is_bot': False, 'first_name': 'asmin', 'username': 'asmindev', 'language_code': 'id'}, 'chat': {'id': 932559405, 'first_name': 'asmin', 'username': 'asmindev', 'type': 'private'}, 'date': 1593951913, 'text': '/start', 'entities': [{'offset': 0, 'length': 6, 'type': 'bot_command'}]}}
+        '''
         #nama_grup = update['message']['chat']['title']
         #grup_id   = update['message']['chat']['id']
         #mem_baru  = update['message']['first_name']
-        #teks      = f'Hai {mem_baru} !\nSelamat datang di Grup {nama_grup}'
-        #send(grup_id, teks)
+        teks      = f'Hai {update["messages"]["first_name"]} !\n now you here'
+        send(data['id'],teks)
     elif data['text'].lower().startswith('/about'):
         text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by t.me/asmindev'
         send(data['id'], text)
