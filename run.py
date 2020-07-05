@@ -26,12 +26,13 @@ def messages(data):
 
 def update(update):
     data = messages(update)
-    if 'new_chat_member' in str(update):
-        nama_grup = update['message']['chat']['title']
-        grup_id   = update['message']['chat']['id']
-        mem_baru  = update['message']['new_chat_member']['first_name']
-        teks      = f'Hai {mem_baru} !\nSelamat datang di Grup {nama_grup}'
-        send(grup_id, teks)
+    if data['text'].startswith('/start'):
+        print(update)
+        #nama_grup = update['message']['chat']['title']
+        #grup_id   = update['message']['chat']['id']
+        #mem_baru  = update['message']['first_name']
+        #teks      = f'Hai {mem_baru} !\nSelamat datang di Grup {nama_grup}'
+        #send(grup_id, teks)
     elif data['text'].lower().startswith('/about'):
         text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by t.me/asmindev'
         send(data['id'], text)
@@ -73,7 +74,6 @@ def index():
     if request.method == 'POST':
         data_update = request.get_json()
         update(data_update)
-        return "oke"
     else:
         return 'NOTHING FOUND HERE'
 

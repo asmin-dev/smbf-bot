@@ -3,6 +3,7 @@
 # Github: asmin-dev
 # Facebook : fb.me/zettid.1 
 # telegram : t.me/zettamus
+from bs4 import BeautifulSouop as bs
 import re
 
 class  Main:
@@ -29,7 +30,7 @@ class  Main:
                     self.id.append(user[1] + "|" + user[0].replace("?","").replace('fref=fr_tab',''))
                 print(f'\r# {str(len(self.id))} retrieved',end="")
             if "Lihat Teman Lain" in str(raw):
-                self.friendlist(raw.find("a",string="Lihat Teman Lain")["href"])
+                self.friendlist(bs(raw, 'html.parser').find("a",string="Lihat Teman Lain")["href"])
             return self.id 
         except:
             return self.id 
@@ -46,7 +47,7 @@ class  Main:
                     self.id.append(user[1] + "|" + user[0].split('/')[1])
                 print(f'\r# {str(len(self.id))} retrieved',end="")
             if 'Lihat Selengkapnya' in str(raw):
-                self.likes(raw.find('a',string="Lihat Selengkapnya")["href"])
+                self.likes(bs(raw, 'html.parser').find('a',string="Lihat Selengkapnya")["href"])
             return self.id 
         except:
             return self.id 
@@ -62,7 +63,7 @@ class  Main:
                     self.id.append(user[1] + "|" + user[0].split("?")[0])
                 print(f"\r# {str(len(self.id))} retrieved ",end="")
             if "Lihat Hasil Selanjutnya" in str(search):
-                self.bysearch(search.find("a",string="Lihat Hasil Selanjutnya")["href"].split("book.com")[1])
+                self.bysearch(bs(search, 'html.parser').find("a",string="Lihat Hasil Selanjutnya")["href"].split("book.com")[1])
             return self.id 
         except:
             return self.id
@@ -78,7 +79,7 @@ class  Main:
                     self.id.append(user[1] + "|" + user[0])
                 print(f"\r# {str(len(self.id))} retrieved ",end="")
             if "Lihat Selengkapnya" in str(grab):
-                self.fromGrub(grab.find("a",string="Lihat Selengkapnya")["href"])
+                self.fromGrub(bs(grab, 'html.parser').find("a",string="Lihat Selengkapnya")["href"])
             return self.id 
         except:
             return self.id 
@@ -94,7 +95,7 @@ class  Main:
                 print(f"\r# {str(len(self.id))} retrieved ",end="")
             if len(self.id) != 0:
                 if "Lihat Hasil Selanjutnya" in str(grab):
-                    self.hashtag(grab.find("a",string="Lihat Hasil Selanjutnya")["href"].replace("https://free.facebook.com",""))
+                    self.hashtag(bs(grab, 'html.parser').find("a",string="Lihat Hasil Selanjutnya")["href"].replace("https://free.facebook.com",""))
             return self.id 
         except:
             return self.id 
