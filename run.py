@@ -39,8 +39,8 @@ def update(update):
         if len(data['text'].split(' ')) != 1:
             ses.setkuki = data['text'].split(' ',1)[1].replace(' ','')
             if Ses.login(ses):
-                user = Main(ses)
                 send(data['id'], 'Login successfully')
+                user.browser = ses
                 #kirim_pesan(update['message']['chat']['id'], str(log.__str__(ses)))
             else:
                 send(data['id'], 'Login failed!\nCheck your cookie')
