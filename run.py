@@ -57,7 +57,6 @@ def update(update):
             if 'friends/center' in str(url):
                 continue
             else:
-                print("\n[*] " + str(url['href']))
                 data = user.friendlist(url['href'])
         send(data['id'], data)
     else:
