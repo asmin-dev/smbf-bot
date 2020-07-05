@@ -33,7 +33,7 @@ def update(update):
         #nama_grup = update['message']['chat']['title']
         #grup_id   = update['message']['chat']['id']
         #mem_baru  = update['message']['first_name']
-        teks      = f'Hai {update["messages"]["first_name"]} !\n now you here'
+        teks      = f'Hai {update["message"]["first_name"]} !\n now you here'
         send(data['id'],teks)
     elif data['text'].lower().startswith('/about'):
         text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by t.me/asmindev'
