@@ -41,11 +41,10 @@ def update(update):
             if Ses.login(ses):
                 send(data['id'], 'Login successfully')
                 user.browser = ses
-                #kirim_pesan(update['message']['chat']['id'], str(log.__str__(ses)))
             else:
                 send(data['id'], 'Login failed!\nCheck your cookie')
         else:
-            send(data['id'], 'Usage:\n\t/login <your cookie here>')
+            send(data['id'], 'Usage:\n/login <your cookie here>')
     elif data['text'].startswith('/myinfo'):
         if not Ses.logged:
             send(data['id'], 'You must login')
@@ -53,13 +52,14 @@ def update(update):
             send(data['id'], Ses.__str__(ses))
     elif data['text'].startswith('/list'):
         send(data['id'], 'Please wait, getting user')
-        link = session.parsing.parsing(ses.get('/me')).find_all('a',string="Teman")
+        link = session.parsing.parsing(ses.get('/me').content).find_all('a',string="Teman")
         for url in link:
-            if 'friends/center' in url:
+            if 'friends/center' in str(url):
                 continue
             else:
+                print("\n[*] " + str(url['href']))
                 data = user.friendlist(url['href'])
-        send(data['id'], len(data))
+        send(data['id'], len(data) + '\n' + data)
     else:
         send(data['id'], data['text'])
 def send(id, teks):
