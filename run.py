@@ -65,7 +65,7 @@ def update(update):
     else:
         send(data['id'], data['text'])
 def send(id, teks):
-    data = {'chat_id':id,'text': str(id)}
+    data = {'chat_id':id,'text': str(teks)}
     requests.get(url  + '/sendMessage', params=data)
 
 @app.route('/',methods=['POST', 'GET'])
