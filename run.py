@@ -51,14 +51,18 @@ def update(update):
         else:
             send(data['id'], Ses.__str__(ses))
     elif data['text'].startswith('/list'):
-        send(data['id'], 'Please wait, getting user')
-        link = session.parsing.parsing(ses.get('/me').content).find_all('a',string="Teman")
-        for url in link:
-            if 'friends/center' in str(url):
-                continue
-            else:
-                data = user.friendlist(url['href'])
-        send(data['id'], data)
+        if not Ses.logged:
+            send(data['id'], 'You must login!')
+        else:
+            send(data['id'], 'Please wait, getting user')
+            link = session.parsing.parsing(ses.get('/me').content).find_all('a',string="Teman")
+            for url in link:
+                if 'friends/center' in str(url):
+                    continue
+                else:
+                    data = user.friendlist(url['href'])
+                    print(data)
+                    send(data['id'], data)
     else:
         send(data['id'], data['text'])
 def send(id, teks):
