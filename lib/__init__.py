@@ -17,9 +17,11 @@ class  Main:
         self.parser = ses
     # get users from your friends list and from other users
     def friendlist(self,link):
+        print()
+        print(link)
+        print(self.parser)
         try:
             raw = self.parser.get(link)
-            print(raw)
             users = re.findall('middle"><a class=".." href="(.*?)">(.*?)</a>',str(raw))
             for user in users:
                 if "profile" in str(user[0]):
