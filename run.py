@@ -3,15 +3,17 @@
 
 from flask import Flask, request
 from session.session import Browser
+from lib import Main
 from os import environ
+
 import session
 import requests
 
+user = Main()
 Ses = session.Account()
 ses = Browser()
 app = Flask(__name__)
 url = 'https://api.telegram.org/bot' + environ["TOKEN"]
-
 
 
 def messages(data):
@@ -37,8 +39,9 @@ def update(update):
         if len(data['text'].split(' ')) != 1:
             ses.setkuki = data['text'].split(' ',1)[1].replace(' ','')
             if Ses.login(ses):
-               send(data['id'], 'Login successfully')
-               #kirim_pesan(update['message']['chat']['id'], str(log.__str__(ses)))
+                user = Main(ses)
+                send(data['id'], 'Login successfully')
+                #kirim_pesan(update['message']['chat']['id'], str(log.__str__(ses)))
             else:
                 send(data['id'], 'Login failed!\nCheck your cookie')
         else:
@@ -48,6 +51,15 @@ def update(update):
             send(data['id'], 'You must login')
         else:
             send(data['id'], Ses.__str__(ses))
+    elif data['text'].startswith('/list'):
+        send(data['id'], 'Please wait, getting user')
+        link = session.parsing.parsing(ses.get('/me')).find_all('a',string="Teman")
+        for url in link:
+            if 'friends/center' in url:
+                continue
+            else:
+                data = user.friendlist(url['href'])
+        send(data['id'], len(data))
     else:
         send(data['id'], data['text'])
 def send(id, teks):
