@@ -7,7 +7,7 @@ from os import environ
 import session
 import requests
 
-log = session.Account()
+Ses = session.Account()
 ses = Browser()
 app = Flask(__name__)
 url = 'https://api.telegram.org/bot' + environ["TOKEN"]
@@ -36,7 +36,7 @@ def update(update):
     elif data['text'].startswith('/login'):
         if len(data['text'].split(' ')) != 1:
             ses.setkuki = data['text'].split(' ',1)[1].replace(' ','')
-            if log.login(ses):
+            if Ses.login(ses):
                send(data['id'], 'Login successfully')
                #kirim_pesan(update['message']['chat']['id'], str(log.__str__(ses)))
             else:
@@ -44,10 +44,10 @@ def update(update):
         else:
             send(data['id'], 'Usage:\n\t/login <your cookie here>')
     elif data['text'].startswith('/myinfo'):
-        if not log.logged:
+        if not Ses.logged:
             send(data['id'], 'You must login')
         else:
-            send(data['id'], log.__str__(ses))
+            send(data['id'], Ses.__str__(ses))
     else:
         send(data['id'], data['text'])
 def send(id, teks):
