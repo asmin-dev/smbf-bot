@@ -21,7 +21,7 @@ class  Main:
         print(link)
         print(self.parser)
         try:
-            raw = self.parser.get(link)
+            raw = self.parser.get(link).content
             users = re.findall('middle"><a class=".." href="(.*?)">(.*?)</a>',str(raw))
             for user in users:
                 if "profile" in str(user[0]):
