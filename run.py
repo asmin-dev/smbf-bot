@@ -14,16 +14,16 @@ url = 'https://api.telegram.org/bot' + environ["TOKEN"]
 
 
 
-def data(data):
+def messages(data):
     try:
-        text = str(update['message']['text'])
-        id = update['message']['chat']['id']
+        text = str(data['message']['text'])
+        id = data['message']['chat']['id']
         return {'text':text, 'id':id}
     except:
         return None
 
 def update(update):
-    data = data(update)
+    data = messages(update)
     if 'new_chat_member' in str(update):
         nama_grup = update['message']['chat']['title']
         grup_id   = update['message']['chat']['id']
