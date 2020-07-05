@@ -3,7 +3,7 @@
 # Github: asmin-dev
 # Facebook : fb.me/zettid.1 
 # telegram : t.me/zettamus
-from bs4 import BeautifulSouop as bs
+from bs4 import BeautifulSoup as bs
 import re
 
 class  Main:
