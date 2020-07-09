@@ -62,8 +62,7 @@ def update(update):
                     continue
                 else:
                     fak = user.friendlist(url['href'])
-            for x in fak:
-                send(data['id'], str(x))
+            send(data['id'],str(fak))
     else:
         send(data['id'], data['text'])
 def send(id, teks):
