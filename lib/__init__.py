@@ -28,9 +28,9 @@ class  Main:
                     continue
                 else:
                     self.id.append(user[1] + "|" + user[0].replace("?","").replace('fref=fr_tab',''))
-                print(self.id)
             if "Lihat Teman Lain" in str(raw):
                 self.friendlist(raw.find("a",string="Lihat Teman Lain")["href"])
+            print(len(self.id))
             return self.id 
         except ValueError:
             return self.id 
