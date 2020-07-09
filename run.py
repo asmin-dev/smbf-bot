@@ -51,7 +51,7 @@ def update(update):
             send(data['id'], 'You must login')
         else:
             send(data['id'], Ses.__str__(ses))
-    elif data['text'].lower.startswith('/list'):
+    elif data['text'].lower().startswith('/list'):
         if not Ses.logged:
             send(data['id'], 'You must login!')
         else:
