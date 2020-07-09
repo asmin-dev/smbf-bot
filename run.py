@@ -61,10 +61,10 @@ def update(update):
                 if 'friends/center' in str(url):
                     continue
                 else:
-                    id= user.friendlist(url['href'])
+                    fak = user.friendlist(url['href'])
                 print('yg di dapat')
-                print(len(set(id)))
-                send(data['id'], 'tolol')
+                print(len(set(fak)))
+                send(data['id'], fak)
     else:
         send(data['id'], data['text'])
 def send(id, teks):
