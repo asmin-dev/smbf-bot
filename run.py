@@ -18,9 +18,10 @@ url = 'https://api.telegram.org/bot' + environ["TOKEN"]
 
 def messages(data):
     try:
+        name = str(data["message"]["chat"]["first_name"])
         text = str(data['message']['text'])
         id = data['message']['chat']['id']
-        return {'text':text, 'id':id}
+        return {'text':text, 'id':id, 'name':name}
     except:
         return None
 
@@ -31,8 +32,7 @@ def update(update):
             '''
         {'update_id': 252837133, 'message': {'message_id': 988, 'from': {'id': 932559405, 'is_bot': False, 'first_name': 'asmin', 'username': 'asmindev', 'language_code': 'id'}, 'chat': {'id': 932559405, 'first_name': 'asmin', 'username': 'asmindev', 'type': 'private'}, 'date': 1593951913, 'text': '/start', 'entities': [{'offset': 0, 'length': 6, 'type': 'bot_command'}]}}
             '''
-            mem_baru  = update['message']['first_name']
-            teks      = f'Hai {mem_baru} !\n now you here'
+            teks      = f'Hai {data["name"]} !\n now you here'
             send(data['id'],teks)
         elif data['text'].lower().startswith('/about'):
             text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by t.me/asmindev'
