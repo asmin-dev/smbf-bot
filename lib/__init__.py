@@ -29,8 +29,7 @@ class  Main:
                 else:
                     self.id.append(user[1] + "|" + user[0].replace("?","").replace('fref=fr_tab',''))
             if "Lihat Teman Lain" in str(raw):
-                page = raw.find("a",string="Lihat Teman Lain")
-                print(page)
+                self.friendlist(raw.find("a",string="Lihat Teman Lain")["href"])
             return self.id 
         except ValueError:
             return self.id 
