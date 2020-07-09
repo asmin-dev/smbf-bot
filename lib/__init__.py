@@ -32,7 +32,7 @@ class  Main:
             if "Lihat Teman Lain" in str(raw):
                 self.friendlist(bs(raw, 'html.parser').find("a",string="Lihat Teman Lain")["href"])
             return self.id 
-        except:
+        except ValueError:
             return self.id 
     
     # GET USER FROM USER REACTED ON POST
