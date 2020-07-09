@@ -77,6 +77,7 @@ def index():
     if request.method == 'POST':
         data_update = request.get_json()
         update(data_update)
+        return 'oke'
     else:
         return 'NOTHING FOUND HERE'
 
