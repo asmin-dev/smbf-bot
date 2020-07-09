@@ -27,47 +27,44 @@ def messages(data):
 
 def update(update):
     data = messages(update)
-    try:
-        if data['text'].startswith('/start'):
-            '''
+    if data['text'].startswith('/start'):
+        '''
         {'update_id': 252837133, 'message': {'message_id': 988, 'from': {'id': 932559405, 'is_bot': False, 'first_name': 'asmin', 'username': 'asmindev', 'language_code': 'id'}, 'chat': {'id': 932559405, 'first_name': 'asmin', 'username': 'asmindev', 'type': 'private'}, 'date': 1593951913, 'text': '/start', 'entities': [{'offset': 0, 'length': 6, 'type': 'bot_command'}]}}
             '''
-            teks      = f'Hai {data["name"]}\nNow you using smbf-bot'
-            send(data['id'],teks)
-        elif data['text'].lower().startswith('/about'):
-            text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by @asmindev'
-            send(data['id'], text)
-        elif data['text'].startswith('/login'):
-            if len(data['text'].split(' ')) != 1:
-                ses.setkuki = data['text'].split(' ',1)[1].replace(' ','')
-                if Ses.login(ses):
-                    send(data['id'], 'Login successfully')
-                    user.browser = ses
-                else:
-                    send(data['id'], 'Login failed!\nCheck your cookie')
+        teks      = f'Hai {data["name"]}\nNow you using smbf-bot'
+        send(data['id'],teks)
+    elif data['text'].lower().startswith('/about'):
+        text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by @asmindev'
+        send(data['id'], text)
+    elif data['text'].startswith('/login'):
+        if len(data['text'].split(' ')) != 1:
+            ses.setkuki = data['text'].split(' ',1)[1].replace(' ','')
+            if Ses.login(ses):
+                send(data['id'], 'Login successfully')
+                user.browser = ses
             else:
-                send(data['id'], 'Usage:\n/login <your cookie here>')
-        elif data['text'].startswith('/myinfo'):
-            if not Ses.logged:
-                send(data['id'], 'You must login')
-            else:
-                send(data['id'], Ses.__str__(ses))
-        elif data['text'].lower.startswith('/list'):
-            if not Ses.logged:
-                send(data['id'], 'You must login!')
-            else:
-                send(data['id'], 'Please wait, getting user')
-                link = session.parsing.parsing(ses.get('/me').content).find_all('a',string="Teman")
-                for url in link:
-                    if 'friends/center' in str(url):
-                        continue
-                    else:
-                        id= user.friendlist(url['href'])
-                        send(data['id'], set(id))
+                send(data['id'], 'Login failed!\nCheck your cookie')
         else:
-            send(data['id'], data['text'])
-    except ValueError as f:
-        send(data['id'], str(f))
+            send(data['id'], 'Usage:\n/login <your cookie here>')
+    elif data['text'].startswith('/myinfo'):
+        if not Ses.logged:
+            send(data['id'], 'You must login')
+        else:
+            send(data['id'], Ses.__str__(ses))
+    elif data['text'].lower.startswith('/list'):
+        if not Ses.logged:
+            send(data['id'], 'You must login!')
+        else:
+            send(data['id'], 'Please wait, getting user')
+            link = session.parsing.parsing(ses.get('/me').content).find_all('a',string="Teman")
+            for url in link:
+                if 'friends/center' in str(url):
+                    continue
+                else:
+                    id= user.friendlist(url['href'])
+                    send(data['id'], set(id))
+    else:
+        send(data['id'], data['text'])
 def send(id, teks):
     data = {'chat_id':id,'text': str(teks)}
     requests.get(url  + '/sendMessage', params=data)
