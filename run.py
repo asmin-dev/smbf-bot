@@ -32,10 +32,10 @@ def update(update):
             '''
         {'update_id': 252837133, 'message': {'message_id': 988, 'from': {'id': 932559405, 'is_bot': False, 'first_name': 'asmin', 'username': 'asmindev', 'language_code': 'id'}, 'chat': {'id': 932559405, 'first_name': 'asmin', 'username': 'asmindev', 'type': 'private'}, 'date': 1593951913, 'text': '/start', 'entities': [{'offset': 0, 'length': 6, 'type': 'bot_command'}]}}
             '''
-            teks      = f'Hai {data["name"]} !\n now you here'
+            teks      = f'Hai {data["name"]}\nNow you using smbf-bot'
             send(data['id'],teks)
         elif data['text'].lower().startswith('/about'):
-            text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by t.me/asmindev'
+            text = 'Hy, i\'m Smbf bot\nI was made for find random account on facebook\nBut I am still in the development stage\nI was made by @asmindev'
             send(data['id'], text)
         elif data['text'].startswith('/login'):
             if len(data['text'].split(' ')) != 1:
@@ -63,10 +63,10 @@ def update(update):
                         continue
                     else:
                         id= user.friendlist(url['href'])
-                        send(data['id'], id)
+                        send(data['id'], set(id))
         else:
             send(data['id'], data['text'])
-    except Exception as f:
+    except ValueError as f:
         send(data['id'], str(f))
 def send(id, teks):
     data = {'chat_id':id,'text': str(teks)}
