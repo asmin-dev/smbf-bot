@@ -62,7 +62,8 @@ def update(update):
                     continue
                 else:
                     id= user.friendlist(url['href'])
-                print(len(id))
+                print('yg di dapat')
+                print(len(set(id)))
             send(data['id'], set(id))
     else:
         send(data['id'], data['text'])
